@@ -169,16 +169,16 @@ def set_vol(val):
 
 
 muted = FALSE
-
+defaultValueVolume = 80
 
 def mute_music():
-    global muted
-    if muted:  # Unmute the music
-        mixer.music.set_volume(0.7)
+    global muted,defaultValueVolume
+    if muted:
+        mixer.music.set_volume(0.8)
         volumeBtn.configure(image=volumePhoto)
-        scale.set(70)
+        scale.set(defaultValueVolume)
         muted = FALSE
-    else:  # mute the music
+    else:
         mixer.music.set_volume(0)
         volumeBtn.configure(image=mutePhoto)
         scale.set(0)
@@ -190,13 +190,10 @@ def mute_music():
 
 
 root = tk.ThemedTk()
-root.get_themes()                 # Returns a list of all themes that can be set
-root.set_theme("radiance")         # Sets an available theme
+root.get_themes()
+root.set_theme("radiance")
 root.geometry("1000x780")
-# Fonts - Arial (corresponds to Helvetica), Courier New (Courier), Comic Sans MS, Fixedsys,
-# MS Sans Serif, MS Serif, Symbol, System, Times New Roman (Times), and Verdana
-#
-# Styles - normal, bold, roman, italic, underline, and overstrike.
+
 
 statusbar = ttk.Label(root, text="Welcome to Melody", relief=SUNKEN, anchor=W, font='Times 10 italic')
 statusbar.pack(side=BOTTOM, fill=X)
@@ -297,8 +294,8 @@ volumeBtn = ttk.Button(bottomframe, image=volumePhoto, command=mute_music)
 volumeBtn.grid(row=0, column=1)
 
 scale = ttk.Scale(bottomframe, from_=0, to=100, orient=HORIZONTAL, command=set_vol)
-scale.set(70)  # implement the default value of scale when music player starts
-mixer.music.set_volume(0.7)
+scale.set(defaultValueVolume)  # implement the default value of scale when music player starts
+mixer.music.set_volume(defaultValueVolume/10)
 scale.grid(row=0, column=2, pady=15, padx=30)
 
 

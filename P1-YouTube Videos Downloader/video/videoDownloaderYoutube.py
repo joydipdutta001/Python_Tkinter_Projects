@@ -20,10 +20,8 @@ from pytube import YouTube
 from pytube import Playlist
 from tkinter.filedialog import *
 from tkinter.messagebox import *
-from tkinter import simpledialog
 from threading import *
-from pytube import Playlist
-from tkinter import Label
+from tkinter.ttk import *
 from tkinter import *
 
 playListCommand= "https://www.youtube.com/playlist"
@@ -68,12 +66,19 @@ def completeDownload(stream=None,file_path=None):
 def progressDownload(stream=None,chunk=None,bytes_remaining=None):
     percent = (100 * ((file_size - bytes_remaining) / file_size))
     btn['text'] = "{:00.0f}%completed".format(percent)
+    barTop['value'] = percent
 def progressDownload2(stream=None,chunk=None,bytes_remaining=None):
     percent = (100 * ((file_size2 - bytes_remaining) / file_size2))
     listBtn['text'] = "{:00.0f}%completed".format(percent)
+    barTop['value'] = percent
+
 def progressDownload3(stream=None,chunk=None,bytes_remaining=None):
     percent = (100 * ((file_size3 - bytes_remaining) / file_size3))
     allBtn['text'] = "{:00.0f}%completed".format(percent)
+    barTop['value'] = percent
+
+
+
 
 # For Single Video Download
 def startDownload(url):
@@ -225,7 +230,17 @@ def btnAllDownload():
     except Exception as e:
         print(e)
 
+# # Animation function 1
 
+def shift():
+    x1,y1,x2,y2 = canvas.bbox("marquee")
+    if(x2<0 or y1<0): #reset the coordinates
+        x1 = canvas.winfo_width()
+        y1 = canvas.winfo_height()//2
+        canvas.coords("marquee",x1,y1)
+    else:
+        canvas.move("marquee", -2, 0)
+    canvas.after(1000//fps,shift)
 
 
 font = ('vardana bold',12)
@@ -237,52 +252,116 @@ root.title("Youtube Downloader")
 root.iconbitmap("res/cyboicon.ico")
 root.geometry("720x720")
 
+# Create the menubar
+menubar = Menu(root)
+root.config(menu=menubar)
+
+# Create the submenu
+
+subMenu = Menu(menubar, tearoff=0)
+
+menubar.add_cascade(label="File", menu=subMenu)
+subMenu.add_command(label="Open")
+subMenu.add_command(label="Exit", command=root.destroy)
+
+
+subMenu = Menu(menubar, tearoff=0)
+menubar.add_cascade(label="Help", menu=subMenu)
+subMenu.add_command(label="About Us")
+
+
+
+# Frames
+topFrame = Frame(root)
+topFrame.pack(side=TOP, padx=10, pady=10,fill=BOTH,expand=TRUE)
+
+middleFrame = Frame(root)
+middleFrame.pack(side=TOP, padx=10, pady=10,fill=BOTH,expand=TRUE)
+
+bottomFrame = Frame(root)
+bottomFrame.pack(side=BOTTOM, padx=10, pady=10,fill=BOTH,expand=TRUE)
+
+
+
+
+
 # image section
 
 img = PhotoImage(file="res/cobolarge.png")
-headingImg = Label(root, image=img)
+headingImg = Label(topFrame, image=img)
 headingImg.pack(side="top",pady='3')
+
+# Animated Text
+canvas=Canvas(topFrame,bg='white')
+canvas.pack(fill=BOTH, expand=1)
+text_var="!!!! Download YouTube Videos and Playlists Easily. visit cybotians.com for more Projects !!!!"
+text=canvas.create_text(0,-2000,text=text_var,font=('vardana',15,'bold'),fill='red',tags=("marquee",),anchor='w')
+x1,y1,x2,y2 = canvas.bbox("marquee")
+width = x2-x1
+height = y2-y1
+canvas['width']=width
+canvas['height']=height
+fps=40    #Change the fps to make the animation faster/slower
+shift()
 
 # making input field
 text1="Paste your video URL here And then Click Download Button"
-Label(root,text= text1,fg = "red",bg = "white",font = "vardana 10 bold").pack(side='top')
+Label(middleFrame,text= text1,fg = "red",bg = "white",font = "vardana 10 bold").pack(side='top')
 
-urlInput= Entry(root,font=font,justify=CENTER)
+urlInput= Entry(middleFrame,font=font,justify=CENTER)
 urlInput.pack(side="top",fill='x',padx='10',pady='5')
 urlInput.focus()
+
+middleFrameBottom = Frame(middleFrame)
+middleFrameBottom.pack(side=TOP, padx=10, pady=10,fill=BOTH,expand=TRUE)
+
 # Download Button
-btn = Button(root, text="Download Video",font=font,relief='ridge',command=btnForSingleDownload)
-btn.pack(side='top',pady='2')
+btn = Button(middleFrameBottom, text="Download Video",font=font,relief='ridge',command=btnForSingleDownload)
+btn.pack(side='left',pady='2',padx=100)
+
+
+# Progress Bar 2
+barTop = Progressbar(middleFrameBottom,length = 100,orient = HORIZONTAL,maximum=100)
+barTop.pack(side="right",padx=100)
+
+
 
 # making input field2
 text2="Paste your playlist URL here to insert the videos in Playlist Box below"
-Label(root,text= text2,fg = "red",bg = "white",font = "vardana 10 bold").pack(side='top',pady='10')
+Label(middleFrame,text= text2,fg = "red",bg = "white",font = "vardana 10 bold").pack(side='top',pady='10')
 
 
-urlInput2= Entry(root,font=font,justify=CENTER)
+urlInput2= Entry(middleFrame,font=font,justify=CENTER)
 urlInput2.pack(side="top",fill='x',padx='10',pady='2')
 urlInput2.focus()
 
 # playlist update Button
-btn2 = Button(root, text="Import Playlist",font=font,relief='ridge',command=btnForPlaylistUpdate)
+btn2 = Button(middleFrame, text="Import Playlist",font=font,relief='ridge',command=btnForPlaylistUpdate)
 btn2.pack(side='top',pady=5)
 
-labelplaylistupdate = Label(root,text= "Nothing Added in The Playlist Box",fg = "black",bg = "Light Green",font = font)
+labelplaylistupdate = Label(middleFrame,text= "Nothing Added in The Playlist Box",fg = "black",bg = "Light Green",font = font)
 labelplaylistupdate.pack(side='top',pady=5)
 
 # PlayList Box
-playlistBox = Listbox(root,selectmode=EXTENDED)
+playlistBox = Listbox(middleFrame,selectmode=EXTENDED)
 playlistBox.pack(side='top',fill='both',pady='10',padx='20',expand='1')
+
+
 
 # Playlist Button
 
-listBtn = Button(root, text= "Download Selected",font=font,relief='ridge',command=btnSelectedDownload)
+listBtn = Button(bottomFrame, text= "Download Selected",font=font,relief='ridge',command=btnSelectedDownload)
 listBtn.pack(side='left',pady=10,padx=20)
-labelselectedDownload = Label(root,text= "Nothing Downloaded yet",fg = "black",bg = "Light Green",font = font)
-labelselectedDownload.pack(side='left',pady=5,padx=100)
 
+# Download Indication
+labelselectedDownload = Label(bottomFrame,text= "Nothing Downloaded yet",fg = "black",bg = "Light Green",font = font)
+labelselectedDownload.pack(side='left',pady=5,padx=20)
+# Progress Bars
 
-allBtn = Button(root, text= "Download All",font=font,relief='ridge',command=btnAllDownload)
+barBottom = Progressbar(bottomFrame,length = 100,orient = HORIZONTAL,maximum=100)
+barBottom.pack(side='left',padx=20)
+
+allBtn = Button(bottomFrame, text= "Download All",font=font,relief='ridge',command=btnAllDownload)
 allBtn.pack(side='right',pady=10,padx=20)
 root.mainloop()
 
