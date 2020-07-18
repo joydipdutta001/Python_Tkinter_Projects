@@ -39,16 +39,33 @@ playlist = []
 def browse_file():
     global filename_path
     filename_path = filedialog.askopenfilename()
+
     add_to_playlist(filename_path)
 
     mixer.music.queue(filename_path)
 
+def browse_file_multiple():
+
+    folderName = filedialog.askopenfilenames()
+
+    for i in folderName:
+        add_to_playlist_all(i)
+
 
 def add_to_playlist(filename):
+    global filename_path
     filename = os.path.basename(filename)
     index = 0
     playlistbox.insert(index, filename)
     playlist.insert(index, filename_path)
+    index += 1
+
+def add_to_playlist_all(filename1):
+    global filename_path
+    filename = os.path.basename(filename1)
+    index = 0
+    playlistbox.insert(index, filename)
+    playlist.insert(index, filename1)
     index += 1
 
 
@@ -175,7 +192,7 @@ def mute_music():
 root = tk.ThemedTk()
 root.get_themes()                 # Returns a list of all themes that can be set
 root.set_theme("radiance")         # Sets an available theme
-root.geometry("1000x720")
+root.geometry("1000x780")
 # Fonts - Arial (corresponds to Helvetica), Courier New (Courier), Comic Sans MS, Fixedsys,
 # MS Sans Serif, MS Serif, Symbol, System, Times New Roman (Times), and Verdana
 #
@@ -224,8 +241,11 @@ leftframe.pack(side=LEFT, padx=10, pady=10,fill=BOTH,expand=TRUE)
 playlistbox = Listbox(leftframe)
 playlistbox.pack(fill=BOTH,pady='5',padx='5',expand=TRUE)
 
-addBtn = ttk.Button(leftframe, text="+ Add", command=browse_file)
+addBtn = ttk.Button(leftframe, text="+ AddOne", command=browse_file)
 addBtn.pack(side=LEFT,expand=TRUE,fill='x')
+
+addMultiBtn = ttk.Button(leftframe, text="+ AddMultiple", command=browse_file_multiple)
+addMultiBtn.pack(side=LEFT,expand=TRUE,fill='x',padx=10)
 
 delBtn = ttk.Button(leftframe, text="- Del", command=del_song)
 delBtn.pack(side=RIGHT,expand=TRUE,fill='x')
