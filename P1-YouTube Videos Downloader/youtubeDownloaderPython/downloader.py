@@ -1,5 +1,4 @@
 from pytube import YouTube
-from pytube import Playlist
 from tkinter.filedialog import *
 from tkinter.messagebox import *
 from threading import *
