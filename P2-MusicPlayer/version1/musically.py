@@ -1,5 +1,5 @@
 DEVELOPER_INFO=""" 
-////////////////////////////////////////////////////////////////////////////////
+////////////////////// ABOUT /////////////////////////////////////
                 author_name= Joydip Dutta,
                 author_email= duttajoydip98@gmail.com,
                 github_id = joydipdutta001
@@ -11,8 +11,7 @@ DEVELOPER_INFO="""
                 Project_Version = 0.1v
                 Project_description= This is a simple music player.
 
-                Thank You...
- ///////////////////////////////////////////////////////////////////////////////   
+ /////////////////////// THANK YOU /////////////////////////////////   
  """
 
 
