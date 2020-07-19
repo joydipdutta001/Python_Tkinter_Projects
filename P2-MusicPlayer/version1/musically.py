@@ -195,7 +195,7 @@ root.set_theme("radiance")
 root.geometry("1000x780")
 
 
-statusbar = ttk.Label(root, text="Welcome to Melody", relief=SUNKEN, anchor=W, font='Times 10 italic')
+statusbar = ttk.Label(root, text="Welcome to Musically", relief=SUNKEN, anchor=W, font='Times 10 italic')
 statusbar.pack(side=BOTTOM, fill=X)
 
 # Create the menubar
@@ -217,7 +217,7 @@ subMenu.add_command(label="About Us", command=about_us)
 
 
 
-root.title("Melody")
+root.title("Musically")
 root.iconbitmap(r'images/cyboicon.ico')
 
 imgHead = PhotoImage(file=r"images/work.png")

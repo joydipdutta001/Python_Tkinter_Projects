@@ -67,6 +67,7 @@ def progressDownload(stream=None,chunk=None,bytes_remaining=None):
     percent = (100 * ((file_size - bytes_remaining) / file_size))
     btn['text'] = "{:00.0f}%completed".format(percent)
     barTop['value'] = percent
+
 def progressDownload2(stream=None,chunk=None,bytes_remaining=None):
     percent = (100 * ((file_size2 - bytes_remaining) / file_size2))
     listBtn['text'] = "{:00.0f}%completed".format(percent)
