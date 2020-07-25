@@ -1,7 +1,7 @@
 # Python And Tkinter Projects✌✌✌✌
 
 # Project-1:- YOUTUBE DOWNLOADER =>
-	Youtube Downloader is a simple exe file which can be installed by the users. User's can Download single video from youtube and also can list out any Playlist from Youtube.
+Youtube Downloader is a simple exe file which can be installed by the users. User's can Download single video from youtube and also can list out any Playlist from Youtube.
 	
    # I used the following Libraries in Python3:
    
@@ -10,7 +10,7 @@
    I used Inno Setup Compiler software to generate the executable setup file of the Python Script. Download Link:https://jrsoftware.org/isdl.php
    
    
-   ![image](https://github.com/joydipdutta001/Python_Tkinter_Projects/blob/master/screenshots/YoutubeVideoDownloader.png)
+   <img align='right' src="https://github.com/joydipdutta001/Python_Tkinter_Projects/blob/master/screenshots/YoutubeVideoDownloader.png" width='400' height='300'>
   
    
 
