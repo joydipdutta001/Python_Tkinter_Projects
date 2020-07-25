@@ -23,6 +23,6 @@ Youtube Downloader is a simple exe file which can be installed by the users. Use
    # 	✔ 1- Tkinter ✔ 2- pygame ✔ 3- ttkthemes ✔ 4- threading
 
    This time I am Providing only python code. I will provide the executable file in future versions.
-  **Clone the repo->** [Click For Download](https://github.com/joydipdutta001/Python_Tkinter_Projects/tree/master/P2-MusicPlayer/version1)
+  **Visit the code->** [Click For Download](https://github.com/joydipdutta001/Python_Tkinter_Projects/tree/master/P2-MusicPlayer/version1)
 
    <img align='middle' src="https://github.com/joydipdutta001/Python_Tkinter_Projects/blob/master/screenshots/Musically.png" width='400' height='400'>
